@@ -35,8 +35,25 @@ public:
 	String_T<T>(size_t capacity) {
 		this->_size = 0;
 		this->_capacity = capacity;
-		_data = new T[_capacity];
+		this->_data = new T[_capacity];
 	}
+	//String_T<T>(const T *val){
+	//	if (val) {
+	//		this->_capacity = 10000;
+	//		int len = sizeof(*val) / sizeof(val[0]);
+	//		this->_size = len;
+	//		this->_data = new T[_capacity];
+	//		for (int i = 0; i < len; i++) {
+	//			push_back(val[i]);
+	//		}
+	//	}
+	//	else {
+	//		this->_size = 0;
+	//		this->_capacity = 10000;
+	//		this->_data = new T[_capacity];
+	//	}
+	//	
+	//}
 
 	String_T<T>(const String_T& obj) {
 		this->_size = obj._size;
@@ -63,7 +80,7 @@ public:
 
 	//迭代器
 	iterator begin() { return &_data[0]; };
-	iterator end() { return &_data[this->_size - 1]; };
+	iterator end() { return &_data[this->_size]; };
 	void clear() {
 		//删除内容
 		if (_data){
@@ -93,6 +110,7 @@ public:
 		{
 			//开空间
 			T* tmp = new T[2 * this->_capacity];
+
 			//拷贝
 			for (int i = 0; i < _size; i++)
 			{
@@ -103,12 +121,12 @@ public:
 				delete[] this->_data;
 			//指向新的空间
 			this->_data = tmp;
+			this->_capacity = 2 * this->_capacity;
 			//更新
 		}
 			
 
 		this->_data[new_capacity - 1] = val;
-		this->_capacity = 2 * this->_capacity;
 		this->_size = new_capacity;
 
 	}
@@ -131,7 +149,17 @@ public:
 	//删除插入
 	//删除指定元素
 	T* erase(T* pos) {
-		if (pos > begin()&&pos <end()){
+		T* _pos = pos;
+		if (pos >= begin() && pos < end() ){
+			while (_pos+1 != end()) {
+				*_pos = *(_pos + 1);
+				_pos++;
+			}
+			pop_back();
+			return pos;
+		}
+		else {
+			return end();
 		}
 	}
 	T* insert(T* pos, T val);//指定位置插入元素
