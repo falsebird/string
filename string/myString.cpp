@@ -47,9 +47,18 @@ String& String::operator=(const String& str)  // 输入参数为const
     return *this;       // 返回本对象的引用
 }
 
-//String& operator + (const String& str1, const String& str2) {
-//    return str1;
-//}
+
+
+String& operator+(const String& str1, const String& str2)
+{
+    // TODO: 在此处插入 return 语句
+    String temp;
+    temp.m_size = str1.get_size() + str2.get_size();
+    temp.m_data = new char[temp.m_size + 1];
+    strcpy(temp.m_data, str1.m_data);
+    strcat(temp.m_data, str2.m_data);
+    return temp;
+}
 
 // 在类外重写opreater函数
 ostream& operator << (ostream& os, const String& str) {

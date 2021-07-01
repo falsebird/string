@@ -15,7 +15,7 @@ public:
     char* get_str() const { return m_data; };//inline
     int get_size() const { return m_size; };//
     String& operator=(const String& str);
-    //friend String& operator + (const String& str1, const String& str2);
+    friend String& operator + (const String& str1, const String& str2);
     friend ostream& operator << (ostream& os, const String &str);//ÓÑÔªº¯Êý
 
 private:
