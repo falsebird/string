@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="myString.h" />
+    <ClInclude Include="String_T.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />

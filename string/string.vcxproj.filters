@@ -18,6 +18,9 @@
     <ClInclude Include="myString.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="String_T.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="myString.cpp">
