@@ -7,15 +7,18 @@ using namespace std;
 
 
 int testgouzao() {
-    String st = "hello";
-    std::cout << st;
+    int a[] = { 1,2,3,4,5 };
+  
+    String_T<int> st(a,5);
+    std::cout << st<<endl;
     return 0;
 }
 int test_copy() {
-    String s1 = "hello";
-    String s2 = "word";
+    int a[] = { 1,2,3,4,5 };
+
+    String_T<int> st(a, 5);
     try {
-        String s3 =  s2 + s1 ;
+        String_T<int> s3 =  st;
         cout << s3 << endl;
         return 0;
     }
@@ -60,20 +63,49 @@ void test_erase() {
     //++ita;
     //++ita;
     //++ita;
-    ita = a.erase(ita);//当超出范围是返沪最后一个元素的市镇
+    ita = a.erase(ita);//当超出范围是返回最后一个元素的后边的指针
     cout << *ita << endl;
     cout << a << endl;
 
 
 }   
 
-int test_initwithval() {
+int test_insert() {
     int a[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-    String_T<int> st(10);
+    String_T<int> st(a,10);
+    cout << st << endl;
+    st.insert(st.begin(), 1000);
+    cout << st << endl;
+    st.insert(st.end(), 1000);
+    cout << st << endl;
+    st.insert(st.end(), 1000);
+    cout << st << endl;
+    String_T<int>::iterator ptr = st.begin();
+    ptr++;
+    ptr++;
+    ptr++;
+    ptr++;
+    st.insert(ptr, 1000);
     cout << st << endl;
     return 0;
 }
+
+int test_popout() {
+    int a[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    String_T<int> st(a, 10);
+    cout << st << endl;
+    st.pop_back();
+    cout << st << endl;
+    st.pop_back();
+    cout << st << endl;
+    st.pop_back();
+    cout << st << endl;
+    st.pop_back();
+    return 0;
+}
+
+
 int main() {
-    test_erase();
+    test_popout();
     return 0;
 }

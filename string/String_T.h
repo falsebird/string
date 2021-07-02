@@ -28,7 +28,9 @@ public:
 public:
 	//初始化
 	String_T<T>() {
-
+		this->_size = 0;
+		this->_capacity = 10000;
+		this->_data = new T[_capacity];
 	}
 
 	//初始化容积
@@ -37,23 +39,25 @@ public:
 		this->_capacity = capacity;
 		this->_data = new T[_capacity];
 	}
-	//String_T<T>(const T *val){
-	//	if (val) {
-	//		this->_capacity = 10000;
-	//		int len = sizeof(*val) / sizeof(val[0]);
-	//		this->_size = len;
-	//		this->_data = new T[_capacity];
-	//		for (int i = 0; i < len; i++) {
-	//			push_back(val[i]);
-	//		}
-	//	}
-	//	else {
-	//		this->_size = 0;
-	//		this->_capacity = 10000;
-	//		this->_data = new T[_capacity];
-	//	}
-	//	
-	//}
+	String_T<T>(const T *val, size_t aryysize){
+		if (aryysize > 0){
+			this->_capacity = 10000;
+			int len = aryysize;
+			this->_data = new T[_capacity];
+			
+			for (int i = 0; i < len; i++) {
+				T a = val[i];
+				cout << a << endl;
+				push_back(a);
+			}
+			
+		}else {
+			this->_size = 0;
+			this->_capacity = 10000;
+			this->_data = new T[_capacity];
+		}
+		
+	}
 
 	String_T<T>(const String_T& obj) {
 		this->_size = obj._size;
@@ -96,7 +100,7 @@ public:
 		return this->_size == 0;
 	}
 	T& at(const size_t &index) {
-		if (empty() || index > _capacity)
+		if (empty() || index > this->_size)
 			return (T)NULL;
 		return _data[index];
 	}
@@ -162,8 +166,40 @@ public:
 			return end();
 		}
 	}
-	T* insert(T* pos, T val);//指定位置插入元素
+	String_T<T>& insert(T* pos, T val)//指定位置插入元素
+	{
+		int new_capacity = _size + 1;
+		//空间不够扩展空间
+		if (new_capacity > this->_capacity)
+		{
+			//开空间
+			T* tmp = new T[2 * this->_capacity];
+			this->_capacity = 2 * this->_capacity;
+			//拷贝
+			for (int i = 0; i < _size; i++)
+			{
+				tmp[i] = this->_data[i];
+			}
+			//释放原有空间
+			if (this->_data)
+				delete[] this->_data;
+			//指向新的空间
+			this->_data = tmp;
+			//更新
+		}
 
+		T* p = end();
+
+		while (p != pos)
+		{
+			*p = *(p - 1);
+			--p;
+		}
+		*p = val;
+		++_size;
+		return *this;
+
+	}
 	
 
 
